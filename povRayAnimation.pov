@@ -1,4 +1,4 @@
-//Creado por Luis S醤chez | https://github.com/gareffmz
+//Creado por Luis S谩nchez | https://github.com/gareffmz
 //2020
 
 
@@ -10,7 +10,7 @@
                                             
 
 
-//C醡ara frontal y luz
+//C谩mara frontal y luz
 
     
     #if(frame_number<24)
@@ -30,7 +30,7 @@
     //camera{location <20,19,0> look_at <-12,5,0>}      
         
          
-    light_source {<30, 40, -25> color rgb <1, 1, 1> } 
+    light_source {<20, 50, -35> color rgb <1, 1, 1> } 
  
 //AMBIENTE 
 
@@ -54,9 +54,87 @@
      translate<0,0,0>
     }
     
+    
+    //Arbustos
+    
+    //arbusto izquierdo grande
+
+    sphere{<5,5,35>,8
+    pigment{
+      image_map {
+      jpeg "texturas/textura_arbusto1.jpg" 
+      map_type 0
+    }}
+    }
+        
+    //arbusto izquierdo chico
+
+    sphere{<2,3,25>,4
+    pigment {
+      image_map {
+      jpeg "texturas/textura_arbusto2.jpg" 
+      map_type 0
+    }}
+    }
+    
+    //arbusto Derecho Grande
+     declare arbustoGrande = sphere{<2,3,25>,11
+      pigment {
+      image_map {
+      jpeg "texturas/textura_arbusto2.jpg" 
+      map_type 0
+    }}
+    }
+    
+    object{arbustoGrande 
+        translate 5*y
+        translate 80*x
+        translate 70*z
+    }
+     
+    //arbusto izquierdo chico 2 
+    sphere{<0,3,-35>,4
+    pigment {
+      image_map {
+      jpeg "texturas/textura_arbusto1.jpg" 
+      map_type 0
+    }}
+    } 
+      
+    //Cactus   
+    
+    #declare texturaCactus = pigment {
+      image_map {
+      jpeg "texturas/textura-cactus.jpg" 
+      map_type 0
+    }}
+    
+                                  
+    #declare brazoIzquierdoCactus=union{
+        cylinder {<25, 5, 0>,    <25, 18, 0>,  2 pigment {texturaCactus}}
+        sphere   { <25, 17.5, 0>, 2 pigment { texturaCactus}}       
+    } 
+    
+    #declare cactus = union{
+        cylinder {<25, -5, 0>,    <25, 18, 0>,  5 pigment {texturaCactus}}
+        sphere   { <25, 17.5, 0>, 5 pigment {texturaCactus}}
+        
+         object{brazoIzquierdoCactus  rotate <0,0,90>
+         translate -13*y
+         translate 29*x
+         translate -2*z}
+        
+
+    }
+    object{cactus 
+         translate 6*y
+         translate 37*x
+         translate 40*z
+    }
+    
     //Agua
     plane {y,-10 
-      texture{ Polished_Chrome }
+      texture{ Polished_Chrome }      
       normal{ bumps 0.03
          scale <1,0.25,0.25>*1
          turbulence 0.6
@@ -79,8 +157,43 @@
          scale<1,1,1>
          rotate<0,0,0>
          translate<0,0,0>
-    }  
-     
+    }    
+    
+    
+    //base de la soga 
+    
+    #declare texturaBase = pigment {
+      image_map {
+      jpeg "texturas/textura-metal1.jpg" 
+      map_type 0
+    }} 
+    
+    #declare texturaBaseTubo = pigment {
+      image_map {
+      jpeg "texturas/textura-metal2.jpg" 
+      map_type 0
+    }}   
+    
+    #declare texturaBaseAterrizaje = pigment {
+      image_map {
+      jpeg "texturas/textura-metal3.jpg" 
+      map_type 1
+    }}
+    
+    
+    
+    declare baseTrampa=union{
+       box{<53,0,-10>,<70,7,10> pigment { texturaBase }}//base 1
+       box{<54,7,-8>,<69,9,8> pigment { texturaBase }}  //base 2
+       cylinder {   <61.2, 0, 0>,    <61.2, 45, 0>,  3 pigment { texturaBaseTubo }}
+       box{<7,45,-8>,<69,46,8> pigment { texturaBaseTubo }}
+    }
+    
+    object{baseTrampa translate 15*x}
+    
+    //base de aterrizaje
+     box{<50.5,0.5,-10.5>,<63,2.2,10.5> pigment {Black}}
+     box{<51,1,-10>,<62,2.5,10> pigment { texturaBaseAterrizaje }} 
 
 //TEXTURAS PERSONAJE
 
@@ -216,7 +329,7 @@
   
 
 //-----------------------------
-//--- COMIENZO DE ANIMACI覰 --
+//--- COMIENZO DE ANIMACI脫N --
 //-----------------------------
     
     #declare cabezaCuelloCuerpo = union{
@@ -254,7 +367,7 @@
  
     };
     
-    //Rama est醫ica hasta el frame 18  
+    //Rama est谩tica hasta el frame 18  
      #if(frame_number<19)
          object { rama }
          object { trampaRoja }
@@ -281,7 +394,7 @@
     #end 
     
     
-//Inicio animaci髇 de caminar
+//Inicio animaci贸n de caminar
 //4 movimientos que se repiten hasta el frame 13    
 
 #if(frame_number=1 | loopframe=1)
@@ -478,10 +591,10 @@
         }
     }; 
                                          
-#end //Fin de animaci髇 de caminar
+#end //Fin de animaci贸n de caminar
 
 
-//Animaci髇 al saltar
+//Animaci贸n al saltar
  #if(frame_number>13 & frame_number<19)
   
     #declare personaje = union { 
@@ -532,7 +645,7 @@
          translate (frame_number-12)*y
     }; 
 
-#end //Fin de animaci髇 al saltar
+#end //Fin de animaci贸n al saltar
 
  #if(frame_number=18)
         #declare personaje = union {
@@ -828,7 +941,7 @@
       
  #end
  
-  //rama est醫ica hasta el final
+  //rama est谩tica hasta el final
   #if(frame_number>24)
      object { rama } 
  #end  
