@@ -1,9 +1,17 @@
-# povrayAnimationExample
+# Animation Example in PovRay
 
 Animation made in povray. For graphics systems class
 
-Result:
+## Result:
 
-![Animation](https://github.com/gareffmz/povrayAnimationExample/blob/main/GIF_Animation.gif)
+Scene
+
+![Scene](https://github.com/gareffmz/povrayAnimationExample/blob/main/scenePreview.JPG)
+
+Animation
+
+![Animation](https://github.com/gareffmz/povrayAnimationExample/blob/main/animationPreview.gif)
+
+
 
 
